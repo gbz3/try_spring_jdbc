@@ -1,10 +1,9 @@
 package com.github.gbz3.try_spring_webmvc.app;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,7 +19,7 @@ public class EchoController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String echo(@Valid EchoForm form, BindingResult result) {
+	public String echo(@Validated EchoForm form, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "echo/input";
 		}
