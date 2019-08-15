@@ -24,8 +24,8 @@ public class EchoController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String echo(@Validated EchoForm form, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			//return "echo/input";
-			throw new IllegalStateException("dummy.");
+			return "echo/input";
+			//throw new IllegalStateException("dummy.");
 		}
 		return "echo/output";
 	}
