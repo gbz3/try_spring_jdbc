@@ -3,6 +3,7 @@ package com.github.gbz3.try_spring_webmvc.app;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,6 @@ public class EchoController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewInput(Model model) {
-		logger.info( "OK?" );
-		String result = jdbcTemplate.queryForObject(
-				"SELECT password FROM my_user WHERE username = ?",
-				String.class, "dummy" );
-		logger.info( "pwd: [" + result + "]" );
 		EchoForm form = new EchoForm();
 		model.addAttribute(form);
 		return "echo/input";
@@ -41,6 +37,16 @@ public class EchoController {
 			return "echo/input";
 			//throw new IllegalStateException("dummy.");
 		}
+		logger.info( "OK?" );
+		try {
+			String pwd = jdbcTemplate.queryForObject(
+					"SELECT password FROM my_user WHERE mail = ?",
+					String.class, form.getText() );
+			logger.info( "pwd: [" + pwd + "]" );
+		} catch (DataAccessException e) {
+			logger.error(e.getLocalizedMessage(), e);
+		}
+
 		return "echo/output";
 	}
 
