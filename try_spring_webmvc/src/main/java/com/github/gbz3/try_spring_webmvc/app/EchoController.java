@@ -1,6 +1,10 @@
 package com.github.gbz3.try_spring_webmvc.app;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +18,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("echo")
 public class EchoController {
 
+	private static final Logger logger = LoggerFactory.getLogger( EchoController.class );
+
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewInput(Model model) {
+		logger.info( "OK?" );
+		String result = jdbcTemplate.queryForObject(
+				"SELECT password FROM my_user WHERE username = ?",
+				String.class, "dummy" );
+		logger.info( "pwd: [" + result + "]" );
 		EchoForm form = new EchoForm();
 		model.addAttribute(form);
 		return "echo/input";

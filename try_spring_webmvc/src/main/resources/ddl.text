@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS my_user (
+  username varchar(40) NOT NULL,
+  password varchar(40) NOT NULL,
+  mail     varchar(128) NOT NULL
+);
+
+DROP TABLE IF EXISTS my_user;
+
+INSERT INTO my_user VALUES( 'dummy', 'password', 'dummy@example.co.jp' );
+
+SELECT * FROM my_user;
+
