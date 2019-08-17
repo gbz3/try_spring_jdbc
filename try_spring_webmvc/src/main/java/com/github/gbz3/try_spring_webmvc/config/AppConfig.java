@@ -8,6 +8,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:jdbc.properties")
 @EnableTransactionManagement
 @MapperScan("com.github.gbz3.try_spring_webmvc.app.mapper")
+@Import(WebSecurityConfig.class)
 public class AppConfig {
 
 	@Bean(destroyMethod = "close")
