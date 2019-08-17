@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.gbz3.try_spring_webmvc.app.mapper.MyUserMapper">
+
+	<resultMap id="userResultMap" type="MyUser">
+		<id column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="mail" property="mail" />
+	</resultMap>
+
+	<select id="findOne" parameterType="string" resultMap="userResultMap"><![CDATA[
+		SELECT
+			username,
+			password,
+			mail
+		FROM my_user
+		WHERE username = #{param}
+	]]></select>
+
+</mapper>

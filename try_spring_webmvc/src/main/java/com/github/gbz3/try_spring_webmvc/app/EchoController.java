@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.github.gbz3.try_spring_webmvc.app.mapper.MyUserMapper;
+import com.github.gbz3.try_spring_webmvc.app.model.MyUser;
+
 @Controller
 @RequestMapping("echo")
 public class EchoController {
@@ -22,7 +25,7 @@ public class EchoController {
 	private static final Logger logger = LoggerFactory.getLogger( EchoController.class );
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	MyUserMapper myUserMapper;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewInput(Model model) {
@@ -31,6 +34,7 @@ public class EchoController {
 		return "echo/input";
 	}
 
+	@Transactional
 	@RequestMapping(method = RequestMethod.POST)
 	public String echo(@Validated EchoForm form, BindingResult result, Model model) {
 		if(result.hasErrors()) {
@@ -39,10 +43,8 @@ public class EchoController {
 		}
 		logger.info( "OK?" );
 		try {
-			String pwd = jdbcTemplate.queryForObject(
-					"SELECT password FROM my_user WHERE mail = ?",
-					String.class, form.getText() );
-			logger.info( "pwd: [" + pwd + "]" );
+			MyUser user = myUserMapper.findOne( form.getText() );
+			logger.info( user.toString() );
 		} catch (DataAccessException e) {
 			logger.error(e.getLocalizedMessage(), e);
 		}

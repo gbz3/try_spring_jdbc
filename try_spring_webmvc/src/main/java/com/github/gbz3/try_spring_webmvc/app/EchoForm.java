@@ -10,7 +10,7 @@ public class EchoForm implements Serializable {
 
 	@NotNull
 	@Size(min = 1, max = 100)
-	@Pattern(regexp = "[_a-zA-Z0-9]+@[._a-zA-Z0-9]+")
+	@Pattern(regexp = "[_a-zA-Z0-9]+")
 	private String text;
 
 	public String getText() {
