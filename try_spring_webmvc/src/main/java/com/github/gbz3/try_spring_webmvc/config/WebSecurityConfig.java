@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@SuppressWarnings("deprecation")
 @EnableWebSecurity
 @ComponentScan("com.github.gbz3.try_spring_webmvc.app.model")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -43,6 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll();
 		http.authorizeRequests()
 			.anyRequest().authenticated();
+		http.logout()
+			.permitAll();
 	}
 
 }
