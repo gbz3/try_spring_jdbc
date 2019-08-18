@@ -8,6 +8,6 @@
 		<setting name="defaultFetchSize" value="100"/>
 	</settings>
 	<typeAliases>
-		<package name="com.github.gbz3.try_spring_webmvc.app.model"/>
+		<package name="com.github.gbz3.authlib.domain.model"/>
 	</typeAliases>
 </configuration>

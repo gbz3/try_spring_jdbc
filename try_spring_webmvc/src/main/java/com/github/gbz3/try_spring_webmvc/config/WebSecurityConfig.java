@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SuppressWarnings("deprecation")
 @EnableWebSecurity
-@ComponentScan("com.github.gbz3.try_spring_webmvc.app.model")
+@ComponentScan("com.github.gbz3.authlib.domain")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired

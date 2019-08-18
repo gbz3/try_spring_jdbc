@@ -12,7 +12,7 @@
 		権限: 「管理者」
 	</div>
 	</sec:authorize>
-	<sec:authorize access="hasRole('ROLE_USER')">
+	<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 	<div>
 		メールアドレス: 「<sec:authentication property="principal.account.mail"/>」
 	</div>

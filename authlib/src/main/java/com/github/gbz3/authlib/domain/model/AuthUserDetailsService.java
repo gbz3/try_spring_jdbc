@@ -1,4 +1,4 @@
-package com.github.gbz3.try_spring_webmvc.app.model;
+package com.github.gbz3.authlib.domain.model;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,24 +12,24 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.gbz3.try_spring_webmvc.app.mapper.MyUserMapper;
+import com.github.gbz3.authlib.domain.mapper.AuthUserMapper;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class AuthUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	MyUserMapper myUserMapper;
+	AuthUserMapper authUserMapper;
 
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		final MyUser account = Optional.ofNullable( myUserMapper.findOne(username) )
+		final AuthUser account = Optional.ofNullable( authUserMapper.findOne(username) )
 				.orElseThrow( () -> new UsernameNotFoundException( "user not found." ) );
-		return new MyUserDetails( account, getAuthorities( account ) );
+		return new AuthUserDetails( account, getAuthorities( account ) );
 	}
 
-	private Collection<GrantedAuthority> getAuthorities( MyUser account ) {
-		return AuthorityUtils.createAuthorityList( "ROLE_USER" );
+	private Collection<GrantedAuthority> getAuthorities( AuthUser account ) {
+		return AuthorityUtils.createAuthorityList( account.getRole() );
 	}
 
 }

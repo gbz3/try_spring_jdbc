@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @PropertySource("classpath:jdbc.properties")
 @EnableTransactionManagement
-@MapperScan("com.github.gbz3.try_spring_webmvc.app.mapper")
+@MapperScan("com.github.gbz3.authlib.domain.mapper")
 @Import(WebSecurityConfig.class)
 public class AppConfig {
 

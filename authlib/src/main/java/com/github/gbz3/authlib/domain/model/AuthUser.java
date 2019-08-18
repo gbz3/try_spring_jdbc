@@ -1,9 +1,10 @@
-package com.github.gbz3.try_spring_webmvc.app.model;
+package com.github.gbz3.authlib.domain.model;
 
-public class MyUser {
+public class AuthUser {
 
 	private String username;
 	private String password;
+	private String role;
 	private String mail;
 
 	public String getUsername() {
@@ -18,6 +19,12 @@ public class MyUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public String getMail() {
 		return mail;
 	}
@@ -27,9 +34,10 @@ public class MyUser {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append( "MyUser{ " );
+		sb.append( "AuthUser{ " );
 		sb.append( "username=" ).append( getUsername() );
 		sb.append( ", password=" ).append( getPassword() );
+		sb.append( ", role=" ).append( getRole() );
 		sb.append( ", mail=" ).append( getMail() );
 		sb.append( " }" );
 		return sb.toString();

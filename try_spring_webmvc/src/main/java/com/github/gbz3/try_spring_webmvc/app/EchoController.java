@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.github.gbz3.try_spring_webmvc.app.mapper.MyUserMapper;
-import com.github.gbz3.try_spring_webmvc.app.model.MyUser;
+import com.github.gbz3.authlib.domain.mapper.AuthUserMapper;
+import com.github.gbz3.authlib.domain.model.AuthUser;
 
 @Controller
 @RequestMapping("echo")
@@ -25,7 +25,7 @@ public class EchoController {
 	private static final Logger logger = LoggerFactory.getLogger( EchoController.class );
 
 	@Autowired
-	MyUserMapper myUserMapper;
+	AuthUserMapper authUserMapper;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewInput(Model model) {
@@ -43,7 +43,7 @@ public class EchoController {
 		}
 		logger.info( "OK?" );
 		try {
-			MyUser user = myUserMapper.findOne( form.getText() );
+			AuthUser user = authUserMapper.findOne( form.getText() );
 			logger.info( user.toString() );
 		} catch (DataAccessException e) {
 			logger.error(e.getLocalizedMessage(), e);

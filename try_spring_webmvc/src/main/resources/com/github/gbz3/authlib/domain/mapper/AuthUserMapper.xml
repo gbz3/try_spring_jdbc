@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.gbz3.try_spring_webmvc.app.mapper.MyUserMapper">
+<mapper namespace="com.github.gbz3.authlib.domain.mapper.AuthUserMapper">
 
-	<resultMap id="userResultMap" type="MyUser">
+	<resultMap id="userResultMap" type="AuthUser">
 		<id column="username" property="username" />
 		<result column="password" property="password" />
+		<result column="role" property="role" />
 		<result column="mail" property="mail" />
 	</resultMap>
 
@@ -13,8 +14,9 @@
 		SELECT
 			username,
 			password,
+			role,
 			mail
-		FROM my_user
+		FROM auth_user
 		WHERE username = #{param}
 	]]></select>
 

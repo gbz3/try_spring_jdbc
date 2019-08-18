@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS auth_user (
+  username varchar(40) NOT NULL,
+  password varchar(40) NOT NULL,
+  role     varchar(40) NOT NULL,
+  mail     varchar(128) NOT NULL
+);
+
+DROP TABLE IF EXISTS auth_user;
+
+INSERT INTO auth_user VALUES( 'dummy', 'password', 'ROLE_USER', 'dummy@example.co.jp' );
+INSERT INTO auth_user VALUES( 'admin', 'password', 'ROLE_ADMIN', 'admin@example.co.jp' );
+
+SELECT * FROM auth_user;
+
