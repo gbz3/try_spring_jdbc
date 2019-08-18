@@ -8,6 +8,9 @@
 	<div>です。</div>
 	<br>
 	<div>
+		「<sec:authentication property="principal.account.mail"/>」
+	</div>
+	<div>
 		<a href="<c:url value='/' />">トップ画面へ戻る</a>
 	</div>
 	<div>
