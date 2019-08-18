@@ -7,9 +7,16 @@
 	</div>
 	<div>です。</div>
 	<br>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	<div>
-		「<sec:authentication property="principal.account.mail"/>」
+		権限: 「管理者」
 	</div>
+	</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_USER')">
+	<div>
+		メールアドレス: 「<sec:authentication property="principal.account.mail"/>」
+	</div>
+	</sec:authorize>
 	<div>
 		<a href="<c:url value='/' />">トップ画面へ戻る</a>
 	</div>
