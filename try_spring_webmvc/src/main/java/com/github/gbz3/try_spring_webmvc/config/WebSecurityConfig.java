@@ -31,12 +31,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return NoOpPasswordEncoder.getInstance();
 	}
 
+	/**
+	 * Web全般のセキュリティ設定
+	 */
 	@Override
 	public void configure(WebSecurity web) {
 		web.ignoring()
 			.antMatchers( "/resources/**" );
 	}
 
+	/**
+	 * Http通信のセキュリティ設定
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.formLogin()
