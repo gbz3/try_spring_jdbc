@@ -47,6 +47,7 @@ public class EchoController {
 			logger.info( user.toString() );
 		} catch (DataAccessException e) {
 			logger.error(e.getLocalizedMessage(), e);
+			throw e;
 		}
 
 		return "echo/output";

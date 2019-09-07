@@ -62,13 +62,13 @@ public class WebApiSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**")
 			.exceptionHandling()
 //			.defaultAuthenticationEntryPointFor( authenticationEntryPoint, new AntPathRequestMatcher( "/api/**" ) );
-			.authenticationEntryPoint( authenticationEntryPoint )
+//			.authenticationEntryPoint( authenticationEntryPoint )
 			.accessDeniedHandler( accessDeniedHandler )
 			;
 
 		http.authorizeRequests().anyRequest().authenticated();
 
-		http.httpBasic();
+		http.httpBasic().authenticationEntryPoint( authenticationEntryPoint );
 		http.csrf().disable();
 
 	}
@@ -85,7 +85,7 @@ public class WebApiSecurityConfig extends WebSecurityConfigurerAdapter {
 					HttpServletRequest request,
 					HttpServletResponse response,
 					AuthenticationException authException ) throws IOException, ServletException {
-				response.setStatus( HttpServletResponse.SC_BAD_REQUEST );
+				response.setStatus( HttpServletResponse.SC_UNAUTHORIZED );
 				response.setContentType( MediaType.APPLICATION_JSON_VALUE );
 				response.setCharacterEncoding( StandardCharsets.UTF_8.displayName() );
 				response.getWriter()
@@ -94,6 +94,10 @@ public class WebApiSecurityConfig extends WebSecurityConfigurerAdapter {
 		};
 	}
 
+	/**
+	 * <p>認可エラー</p>
+	 * @return
+	 */
 	@Bean
 	AccessDeniedHandler accessDeniedHandler() {
 		return new AccessDeniedHandler() {
