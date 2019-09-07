@@ -3,6 +3,7 @@
 - [フォーム認証とBasic認証の混在設定](https://qiita.com/shibafu/items/26c9a3a48fe32ba0b647)
 - [Spring Security の認証](https://terasolunaorg.github.io/guideline/5.1.0.RELEASE/ja/Security/Authentication.html)
 - [Spring Security の認可](https://terasolunaorg.github.io/guideline/5.1.0.RELEASE/ja/Security/Authorization.html)
+- [Multiple Entry Points in Spring Security](https://www.baeldung.com/spring-security-multiple-entry-points)
 
 ```
 ※xml 設定例

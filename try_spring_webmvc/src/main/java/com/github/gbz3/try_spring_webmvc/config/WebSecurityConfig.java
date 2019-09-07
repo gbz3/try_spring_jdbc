@@ -39,11 +39,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// セキュリティで管理されたページの設定
+		http.authorizeRequests()
+			.antMatchers( "/**" )
+			.authenticated();
+
 		http.formLogin()
 			.loginPage("/login")
+			.defaultSuccessUrl( "/top" )
+			.failureUrl( "/login?error" )
 			.permitAll();
-		http.authorizeRequests()
-			.anyRequest().authenticated();
+//		http.authorizeRequests()
+//			.anyRequest().authenticated();
 		http.logout()
 			.permitAll();
 	}
