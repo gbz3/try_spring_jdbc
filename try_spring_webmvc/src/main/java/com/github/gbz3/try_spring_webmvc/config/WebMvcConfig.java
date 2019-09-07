@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SuppressWarnings("deprecation")
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.github.gbz3.try_spring_webmvc.app")
+@ComponentScan({"com.github.gbz3.try_spring_webmvc.api", "com.github.gbz3.try_spring_webmvc.app"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	public void configureViewResolvers(ViewResolverRegistry registry) {

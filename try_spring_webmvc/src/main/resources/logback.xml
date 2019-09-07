@@ -14,11 +14,11 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="com.github.gbz3" level="debug" additivity="false">
+    <logger name="com.github.gbz3" level="trace" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <root level="error">
+    <root level="debug">
         <appender-ref ref="STDOUT"/>
     </root>
 

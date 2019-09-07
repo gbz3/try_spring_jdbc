@@ -13,14 +13,17 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@SuppressWarnings("deprecation")
 @Configuration
 @PropertySource("classpath:jdbc.properties")
 @EnableTransactionManagement
 @MapperScan("com.github.gbz3.authlib.domain.mapper")
-@Import(WebSecurityConfig.class)
+@Import({WebApiSecurityConfig.class, WebSecurityConfig.class})
 public class AppConfig {
 
 	@Bean(destroyMethod = "close")
@@ -61,6 +64,11 @@ public class AppConfig {
 		sessionFactoryBean.setDataSource(dataSource);
 		sessionFactoryBean.setConfigLocation(new ClassPathResource("/mybatis-config.xml"));
 		return sessionFactoryBean;
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
 	}
 
 }

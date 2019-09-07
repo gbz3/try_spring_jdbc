@@ -2,6 +2,8 @@ package com.github.gbz3.try_spring_webmvc.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,7 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @ComponentScan({"com.github.gbz3.authlib.domain"})
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class WebApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	UserDetailsService userDetailsService;
@@ -30,8 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(WebSecurity web) {
-		web.ignoring()
-			.antMatchers( "/resources/**" );
 	}
 
 	/**
@@ -39,13 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.formLogin()
-			.loginPage("/login")
-			.permitAll();
-		http.authorizeRequests()
-			.anyRequest().authenticated();
-		http.logout()
-			.permitAll();
+		http.antMatcher("/api/**");
+
+		http.authorizeRequests().anyRequest().authenticated();
+
+		http.httpBasic();
+		http.csrf().disable();
+
 	}
 
 }
