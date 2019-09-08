@@ -9,22 +9,27 @@
 
 ```
 ※xml 設定例
+<!-- 認証不要なリソース類 -->
 <sec:http pattern="/resources/**" security="none" />
-<sec:http auto-config="false" use-expressions="true"
-	entry-point-ref="authenticationEntryPoint" >
+
+<!-- API は Basic認証 -->
+<sec:http pattern="/api/**" auto-config="false" use-expressions="true">
 	<!-- API用セキュリティ設定 -->
-	<sec:intercept-url pattern="/api/**" access="isAuthenticated()" />
-	<sec:http-basic />
+	<sec:intercept-url pattern="/api/**" access="hasRole('ROLE_SYSADMIN')" />
+	<sec:http-basic entry-point-ref="apiAuthenticationEntryPoint" />
 	<sec:csrf disabled="true" />
 	<!-- 都度認証を行う。セッションを作成しない、セッションが存在しても使用しない -->
 	<sec:session-management create-session="stateless" />
 	<!-- AccessDeniedHandler(権限エラー)のカスタマイズ -->
 	<sec:access-denied-handler ref="accessDeniedHandler" />
 </sec:http>
+
+<!-- その他は Form認証 -->
 <sec:http auto-config="false" use-expressions="true" >
 	<sec:intercept-url pattern="/login" access="permitAll" />
 	<sec:intercept-url pattern="/anyPath" access="isAuthenticated()" />
 	<sec:intercept-url pattern="/**" access="denyAll" />
+	<sec:form-login />
 	<!-- omitted -->
 </sec:http>
 
@@ -33,7 +38,7 @@
 </sec:authentication-manager>
 
 <!-- AutheticationEntryPoint(未認証エラー)のカスタマイズ -->
-<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint">
+<bean id="apiAuthenticationEntryPoint" class="org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint">
 	<!-- omitted -->
 </bean>
 <!-- AccessDeniedHandler(権限エラー)のカスタマイズ -->
