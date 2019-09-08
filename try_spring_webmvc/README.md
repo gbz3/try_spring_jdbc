@@ -4,6 +4,8 @@
 - [Spring Security の認証](https://terasolunaorg.github.io/guideline/5.1.0.RELEASE/ja/Security/Authentication.html)
 - [Spring Security の認可](https://terasolunaorg.github.io/guideline/5.1.0.RELEASE/ja/Security/Authorization.html)
 - [Multiple Entry Points in Spring Security](https://www.baeldung.com/spring-security-multiple-entry-points)
+  [※機械翻訳版](https://www.codeflow.site/ja/article/spring-security-multiple-entry-points)
+- [Basic認証とForm認証を混在させる例](http://www.ne.jp/asahi/hishidama/home/tech/java/spring/boot/rest/basic-auth.html)
 
 ```
 ※xml 設定例
