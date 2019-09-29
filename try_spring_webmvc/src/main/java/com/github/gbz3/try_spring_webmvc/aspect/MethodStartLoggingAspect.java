@@ -11,6 +11,6 @@ public class MethodStartLoggingAspect {
 
 	@Before( "execution(* *..*Controller.*(..))" )
 	public void startLog( JoinPoint jp ) {
-		System.out.println( "★メソッド開始: " + jp.getSignature() );
+		System.out.println( "★メソッド開始:  " + jp.getSignature() );
 	}
 }
