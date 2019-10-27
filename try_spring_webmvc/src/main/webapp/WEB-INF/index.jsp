@@ -3,6 +3,7 @@
 <h2>Hello World!</h2>
 <ul>
 	<li><a href="<c:url value='/echo' />">エコーアプリケーションへ</a></li>
+	<p>Your principal object is....: <%= request.getUserPrincipal() %></p>
 </ul>
 </body>
 </html>

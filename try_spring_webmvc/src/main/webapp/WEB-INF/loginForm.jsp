@@ -32,6 +32,8 @@
 				</tr>
 			</table>
 		</form:form>
+	<p>Your principal object is....: <%= request.getUserPrincipal() %></p>
+	<!-- org.apache.catalina.authenticator.SingleSignOn を有効化すると、未認証の時は要求先Webアプリの認証に進み、認証後は Principal を要求先Webアプリに渡す？ -->
 	</div>
 </body>
 </html>
