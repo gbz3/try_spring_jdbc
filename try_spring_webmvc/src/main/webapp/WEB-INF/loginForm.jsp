@@ -33,7 +33,17 @@
 			</table>
 		</form:form>
 	<p>Your principal object is....: <%= request.getUserPrincipal() %></p>
-	<!-- org.apache.catalina.authenticator.SingleSignOn を有効化すると、未認証の時は要求先Webアプリの認証に進み、認証後は Principal を要求先Webアプリに渡す？ -->
+	<!--
+	org.apache.catalina.authenticator.SingleSignOn を有効化すると、未認証の時は要求先Webアプリの認証に進み、認証後は Principal を要求先Webアプリに渡す？
+	[Java開発者向け] シングルサインオンへの対応 - Java ... - Wagby
+	https://wagby.com/wdn8/download/WTM2019SingleSignOn.pdf
+
+	Spring securityで学ぶＳＳＯ入門
+	https://www.slideshare.net/ishikawahiroshi1/spring-security-94403652
+
+	spring securityで独自の認証を実装する
+	https://ishiis.net/2016/08/27/spring-security-custom-authentication/
+	 -->
 	</div>
 </body>
 </html>
